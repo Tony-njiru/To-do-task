@@ -1,4 +1,3 @@
-// LocalStorage.js
 
 export const LocalStorage = {
     // Get data from local storage
