@@ -27,9 +27,9 @@
   border-radius: 4px;
   font-size: 16px;
   outline: none;
-  display: none; /* Initially hide the input field */
+  display: none; 
   background-color: transparent;
-  color: #007bff; /* Text color for the custom category */
+  color: #007bff; 
 }
 
 .category-selector select option {
@@ -39,8 +39,8 @@
 
 /* Style for the custom category input field */
 .category-selector input[type="text"] {
-  display: block; /* Show the input field when needed */
-  color: #007bff; /* Text color for the custom category */
+  display: block; 
+  color: #007bff; 
 }
 
 /* Emojis for categories */
@@ -64,7 +64,7 @@
 
 .category-option.custom::before {
   content: '✨';
-  color: #e8a87c; /* Color for the custom category label */
+  color: #e8a87c; 
 }
 .category-label{
   background-color: #e8a87c;
