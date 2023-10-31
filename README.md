@@ -10,6 +10,8 @@ This is a web-based Todo application that helps you manage your tasks efficientl
 
 - **Search and Filter**: Easily find tasks with the search bar. Filter tasks by category or text, making it simple to locate specific items.
 
+- **minimizes to do**: minimizes your todos just incse you have lots of them; saving your screen and able to manage them at once.
+
 - **Task Management**: Mark tasks as done, edit their titles and descriptions, or delete them when they're completed or no longer needed.
 
 - **Copy to Clipboard**: Copy the task description to your clipboard with a single click, allowing you to quickly share or reference task details.
