@@ -5,7 +5,6 @@ body {
   padding: 0;
 }
 
-/* Styling for the entire To-Do App container */
 .todo-app {
   display: flex;
   background: #ffffffb2;
