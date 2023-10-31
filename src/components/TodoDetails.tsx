@@ -1,3 +1,4 @@
+//Carries categories and todo labels
 import React from 'react';
 
 interface TodoDetailsProps {
