@@ -1,4 +1,3 @@
-//main code
 import React, { useState, useEffect } from 'react';
 import './Todo.css';
 import SearchBar from './searchbar';
@@ -48,21 +47,28 @@ const Todo: React.FC = () => {
   }, [todos]);
 
   const addLabel = () => {
-    if (labelTitle && labelCategory) {
+    if (labelTitle) {
+      let category = labelCategory;
+
+      if (labelCategory === 'custom' && customCategory.trim() !== '') {
+        category = customCategory.trim();
+      }
+
       const newLabel: AddedLabel = {
         title: labelTitle,
         description: labelDescription,
-        category: labelCategory,
+        category: category, // Set the category based on user input
         fullInfo: {
           title: labelTitle,
           description: labelDescription,
-          category: labelCategory,
+          category: category, // Update the category here as well
         },
       };
       setAddedLabels([...addedLabels, newLabel]);
       setLabelTitle('');
       setLabelDescription('');
       setLabelCategory('');
+      setCustomCategory('');
       setShowLabelInput(false);
     }
   };
@@ -82,7 +88,7 @@ const Todo: React.FC = () => {
   const deleteLabel = (index: number) => {
     const updatedLabels = addedLabels.filter((_, i) => i !== index);
     setAddedLabels(updatedLabels);
-    setPreviewIndex(null); 
+    setPreviewIndex(null);
   };
 
   const editTodo = (index: number, newTitle: string, newDescription: string) => {
@@ -173,19 +179,19 @@ const Todo: React.FC = () => {
                 onClick={() => copyToClipboard(addedLabels[previewIndex].fullInfo.description)}
                 className="icon-button"
               >
-                <FontAwesomeIcon icon={faClipboard} /> Copy
+                <FontAwesomeIcon icon={faClipboard} />
               </button>
               <button
                 onClick={() => markAsDone(previewIndex)}
                 className="icon-button"
               >
-                <FontAwesomeIcon icon={faCheck} /> Done
+                <FontAwesomeIcon icon={faCheck} />
               </button>
               <button
                 onClick={() => deleteLabel(previewIndex)}
                 className="icon-button"
               >
-                <FontAwesomeIcon icon={faTrash} /> Delete
+                <FontAwesomeIcon icon={faTrash} />
               </button>
             </div>
           </div>
