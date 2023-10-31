@@ -20,9 +20,6 @@ const TodoForm: React.FC<TodoFormProps> = ({ onTodoAdd }) => {
 
   const handleAddTodo = () => {
     let category = todoCategory || customCategory; // Use the selected category or custom category input
-    if (todoCategory === 'Custom' && customCategory.trim() !== '') {
-      category = customCategory.trim(); // Use the custom category input if it's not empty
-    }
 
     const newTodo: TodoItem = {
       title: todoTitle,
@@ -59,9 +56,9 @@ const TodoForm: React.FC<TodoFormProps> = ({ onTodoAdd }) => {
         <option value="">Select Category</option>
         <option value="Work">Work</option>
         <option value="Personal">Personal</option>
-        <option value="Custom">Custom</option>
+        <option value="">Custom</option> {/* Change the value to an empty string */}
       </select>
-      {todoCategory === 'Custom' && (
+      {todoCategory === '' && (
         <input
           type="text"
           placeholder="Custom Category"
