@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# Todo App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a web-based Todo application that helps you manage your tasks efficiently. With a user-friendly interface and key features, you can stay organized and on top of your to-do list.
 
-## Available Scripts
+![Todo App Screenshot](/screenshots/todo-app.png)
 
-In the project directory, you can run:
+## Features
 
-### `npm start`
+- **Add and Categorize Tasks**: Create tasks with titles, descriptions, and categories. Choose from pre-defined categories like "work," "personal," and "study," or create your own custom categories.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- **Search and Filter**: Easily find tasks with the search bar. Filter tasks by category or text, making it simple to locate specific items.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- **Task Management**: Mark tasks as done, edit their titles and descriptions, or delete them when they're completed or no longer needed.
 
-### `npm test`
+- **Copy to Clipboard**: Copy the task description to your clipboard with a single click, allowing you to quickly share or reference task details.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Getting Started
 
-### `npm run build`
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/yourusername/todo-app.git
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+ ## project directory:
+cd todo-app
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Install dependencies
+npm install
+## Start the development server
+npm start
+Open your web browser and access the app at http://localhost:3000.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+Usage
+Adding a Task: Click the "Add Task" button and provide a title, description, and category for your task. You can choose a pre-defined category or create a custom one.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Searching for Tasks: Use the search bar to find tasks by title or description. The app will instantly filter tasks as you type.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Managing Tasks: To mark a task as done, click the "Done" button on the task's preview. To delete a task press delete, select the task and use the provided options.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Copying to Clipboard: Click the "Copy" button to copy the task's description to your clipboard.
