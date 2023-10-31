@@ -16,3 +16,4 @@ const CopyButton: React.FC<CopyButtonProps> = ({ textToCopy, onCopy }) => {
 };
 
 export default CopyButton;
+// This code is rensposible for  copy to clipboard
