@@ -1,0 +1,152 @@
+/* Base Styles */
+.todo-app {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100vh;
+}
+
+.left-section, .right-section {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #ccc;
+  overflow-y: auto;
+  max-height: 100%;
+}
+
+.left-section {
+  flex: 0.3; /* Make the left section thinner */
+  min-width: 0; /* Remove the minimum width */
+}
+
+.left-section ul, .right-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.left-section li, .right-section li {
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid #eee;
+  margin: 4px;
+}
+
+.selected-label {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.right-section h2 {
+  margin: 0;
+}
+
+.right-section h3 {
+  color: #007bff;
+}
+
+.right-section p {
+  margin: 0;
+}
+
+.done-label {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* Mobile Layout */
+@media (max-width: 767px) {
+  .left-section {
+    flex: 0.3; /* Maintain the left section's width */
+  }
+}
+/* Your existing CSS code */
+
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f0f0;
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.left {
+  width: 30%;
+  background-color: #f0f0f0;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.section-title {
+  cursor: pointer;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo {
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid #eee;
+  margin: 4px;
+}
+
+.selected-label {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.done-label {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.right {
+  width: 70%;
+  background-color: #f6f6f6;
+  padding: 10px;
+  overflow-y: scroll;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.icon-buttons {
+  display: flex;
+}
+
+.icon {
+  cursor: pointer;
+  margin-right: 8px;
+}
+
+.done {
+  text-decoration: line-through;
+  color: #999;
+}
+
+.category-label {
+  padding: 4px 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 4px;
+}
+.label-input {
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+/* Your existing CSS code */

@@ -1,0 +1,71 @@
+.category-selector {
+  display: flex;
+  align-items: center;
+  background-color: #dab5b5;
+  padding: 10px;
+  border-radius: 8px;
+  margin: 10px 0;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.category-selector select {
+  flex: 1;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  background-color: transparent;
+  color: #007bff;
+}
+
+.category-selector input {
+  flex: 1;
+  border: none;
+  padding: 8px;
+  border-radius: 4px;
+  font-size: 16px;
+  outline: none;
+  display: none; /* Initially hide the input field */
+  background-color: transparent;
+  color: #007bff; /* Text color for the custom category */
+}
+
+.category-selector select option {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+/* Style for the custom category input field */
+.category-selector input[type="text"] {
+  display: block; /* Show the input field when needed */
+  color: #007bff; /* Text color for the custom category */
+}
+
+/* Emojis for categories */
+.category-option::before {
+  content: ' ';
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.category-option.work::before {
+  content: '🏢';
+}
+
+.category-option.travel::before {
+  content: '✈️';
+}
+
+.category-option.school::before {
+  content: '📚';
+}
+
+.category-option.custom::before {
+  content: '✨';
+  color: #e8a87c; /* Color for the custom category label */
+}
+.category-label{
+  background-color: #e8a87c;
+}
