@@ -1,9 +1,10 @@
+//main code
 import React, { useState, useEffect } from 'react';
 import './Todo.css';
 import SearchBar from './searchbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy, faCheck, faTrash, faClipboard } from '@fortawesome/free-solid-svg-icons';
-import { LocalStorage } from './LocalStorage'; // Import the LocalStorage module
+import { LocalStorage } from './LocalStorage';
 
 interface TodoItem {
   title: string;
@@ -36,6 +37,8 @@ const Todo: React.FC = () => {
   const [labelCategory, setLabelCategory] = useState<string>('');
   const [customCategory, setCustomCategory] = useState<string>('');
   const [addedLabels, setAddedLabels] = useState<AddedLabel[]>([]);
+  const [showCustomCategoryInput, setShowCustomCategoryInput] = useState<boolean>(false);
+  const [message, setMessage] = useState<string>('');
 
   useEffect(() => {
     const storedTodos = LocalStorage.get('todos', []); // Retrieve todos from local storage
@@ -63,6 +66,11 @@ const Todo: React.FC = () => {
       setLabelDescription('');
       setLabelCategory('');
       setShowLabelInput(false);
+      setMessage(''); // Reset the message
+    } else if (showCustomCategoryInput) {
+      setMessage('Choose category or create a custom one');
+    } else {
+      setMessage('Choose category');
     }
   };
 
@@ -81,7 +89,7 @@ const Todo: React.FC = () => {
   const deleteLabel = (index: number) => {
     const updatedLabels = addedLabels.filter((_, i) => i !== index);
     setAddedLabels(updatedLabels);
-    setPreviewIndex(null); // Reset the preview index
+    setPreviewIndex(null); 
   };
 
   const editTodo = (index: number, newTitle: string, newDescription: string) => {
@@ -133,7 +141,14 @@ const Todo: React.FC = () => {
             <select
               placeholder="Label Category"
               value={labelCategory}
-              onChange={(e) => setLabelCategory(e.target.value)}
+              onChange={(e) => {
+                setLabelCategory(e.target.value);
+                if (e.target.value === 'custom') {
+                  setShowCustomCategoryInput(true);
+                } else {
+                  setShowCustomCategoryInput(false);
+                }
+              }}
             >
               <option value="">Select Category</option>
               {['school', 'personal', 'work out'].map((category) => (
@@ -143,7 +158,7 @@ const Todo: React.FC = () => {
               ))}
               <option value="custom">Custom</option>
             </select>
-            {labelCategory === 'custom' && (
+            {showCustomCategoryInput && (
               <input
                 placeholder="Custom Category"
                 value={customCategory}
@@ -151,6 +166,7 @@ const Todo: React.FC = () => {
               />
             )}
             <button onClick={addLabel}>Add Task</button>
+            {message && <p className="error-message">{message}</p>}
           </div>
         )}
         <ul className="label-list">
