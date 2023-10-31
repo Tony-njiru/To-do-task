@@ -1,4 +1,3 @@
-//main code
 import React, { useState, useEffect } from 'react';
 import './Todo.css';
 import SearchBar from './searchbar';
@@ -37,6 +36,7 @@ const Todo: React.FC = () => {
   const [labelCategory, setLabelCategory] = useState<string>('');
   const [customCategory, setCustomCategory] = useState<string>('');
   const [addedLabels, setAddedLabels] = useState<AddedLabel[]>([]);
+  const [isLabelPreviewed, setIsLabelPreviewed] = useState<boolean>(false); // New state variable
 
   useEffect(() => {
     const storedTodos = LocalStorage.get('todos', []); // Retrieve todos from local storage
@@ -48,21 +48,28 @@ const Todo: React.FC = () => {
   }, [todos]);
 
   const addLabel = () => {
-    if (labelTitle && labelCategory) {
+    if (labelTitle) {
+      let category = labelCategory;
+
+      if (labelCategory === 'custom' && customCategory.trim() !== '') {
+        category = customCategory.trim();
+      }
+
       const newLabel: AddedLabel = {
         title: labelTitle,
         description: labelDescription,
-        category: labelCategory,
+        category: category, // Set the category based on user input
         fullInfo: {
           title: labelTitle,
           description: labelDescription,
-          category: labelCategory,
+          category: category, // Update the category here as well
         },
       };
       setAddedLabels([...addedLabels, newLabel]);
       setLabelTitle('');
       setLabelDescription('');
       setLabelCategory('');
+      setCustomCategory('');
       setShowLabelInput(false);
     }
   };
@@ -82,7 +89,7 @@ const Todo: React.FC = () => {
   const deleteLabel = (index: number) => {
     const updatedLabels = addedLabels.filter((_, i) => i !== index);
     setAddedLabels(updatedLabels);
-    setPreviewIndex(null); 
+    setPreviewIndex(null);
   };
 
   const editTodo = (index: number, newTitle: string, newDescription: string) => {
@@ -97,7 +104,13 @@ const Todo: React.FC = () => {
   };
 
   const selectLabel = (index: number) => {
-    setPreviewIndex(index);
+    if (index === previewIndex) {
+      setPreviewIndex(null);
+      setIsLabelPreviewed(false);
+    } else {
+      setPreviewIndex(index);
+      setIsLabelPreviewed(true);
+    }
   };
 
   const filteredLabels = addedLabels.filter((label) =>
@@ -156,7 +169,7 @@ const Todo: React.FC = () => {
         )}
         <ul className="label-list">
           {filteredLabels.map((label, index) => (
-            <li key={index} onClick={() => selectLabel(index)}>
+            <li key={index} onClick={() => selectLabel(index)} className={isLabelPreviewed && index === previewIndex ? 'selected-label' : ''}>
               <span className="label-title">{label.title}</span>
               <span className="label-category">{label.category}</span>
             </li>
@@ -173,19 +186,19 @@ const Todo: React.FC = () => {
                 onClick={() => copyToClipboard(addedLabels[previewIndex].fullInfo.description)}
                 className="icon-button"
               >
-                <FontAwesomeIcon icon={faClipboard} /> Copy
+                <FontAwesomeIcon icon={faClipboard} className="fa-icon" />
               </button>
               <button
                 onClick={() => markAsDone(previewIndex)}
                 className="icon-button"
               >
-                <FontAwesomeIcon icon={faCheck} /> Done
+                <FontAwesomeIcon icon={faCheck} className="fa-icon" />
               </button>
               <button
                 onClick={() => deleteLabel(previewIndex)}
                 className="icon-button"
               >
-                <FontAwesomeIcon icon={faTrash} /> Delete
+                <FontAwesomeIcon icon={faTrash} className="fa-icon" />
               </button>
             </div>
           </div>
