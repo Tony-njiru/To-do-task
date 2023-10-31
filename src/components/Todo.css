@@ -1,21 +1,23 @@
-/* General styles */
+/* Reset default styles and set the background color and font for the entire page */
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background-color: #371a7c;
   margin: 0;
   padding: 0;
 }
 
+/* Styling for the entire To-Do App container */
 .todo-app {
   display: flex;
-  background: #fff;
-  border: 1px solid #ccc;
+  background: #ffffffb2;
+  border: 1px solid #ccccccd3;
   border-radius: 5px;
   margin: 20px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   overflow: hidden; /* Prevent overflow on smaller screens */
 }
 
+/* Individual sections of the To-Do App */
 .left-section,
 .center-section,
 .right-section {
@@ -24,15 +26,18 @@ body {
   flex: 1;
 }
 
+/* Adjust the width of the left section to make it smaller */
 .left-section {
-  flex: 0.3; /* Adjust the width for the left section */
+  flex: 0.3; 
 }
 
+/* Add a vertical line to separate the sections */
 .vertical-line {
   border-right: 1px solid #ccc;
   height: 100%;
 }
 
+/* Styling for section titles */
 .section-title {
   color: #333;
   cursor: pointer;
@@ -62,11 +67,13 @@ body {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Apply different styles for completed tasks */
 .todo.done {
   background-color: #f0f9e8;
   border: 1px solid #a0d468;
 }
 
+/* Style the label and details section */
 .details-label {
   cursor: pointer;
   color: #007bff;
@@ -77,6 +84,7 @@ body {
   text-decoration: underline;
 }
 
+/* Style paragraph text inside tasks */
 .todo p {
   margin: 0;
 }
@@ -130,7 +138,7 @@ body {
   background: #0056b3;
 }
 
-/* Labels styling with 3D effect and different colors */
+/* Style Labels and Label input with 3D effect and different colors */
 .label-list {
   list-style: none;
   padding: 0;
@@ -163,18 +171,17 @@ body {
   font-size: 14px;
 }
 
-/* Different colors for each label */
+/* Apply different colors to alternate labels */
 .label-list li:nth-child(odd) {
   background-color: #ffc107;
-  border: 2px solid #ff9800;
+  border: 2px solid #006eff;
 }
 
 .label-list li:nth-child(even) {
   background-color: #2196F3;
-  border: 2px solid #1976d2;
+  border: 2px solid #11dbba;
 }
 
-/* Added Labels and Preview section styles */
 .added-labels {
   margin: 20px 0;
 }
@@ -224,7 +231,7 @@ body {
   font-size: 20px;
 }
 
-/* Additional styles for the SearchBar section */
+/* Styling for the search bar */
 .search-bar {
   margin: 20px 0;
   display: flex;
@@ -256,11 +263,14 @@ body {
   background: #0056b3;
 }
 
+/* Styling for icon buttons and add label button */
 .icon-button {
   font-size: 24px;
+  color: #007bff; /* Blue color for the icon buttons */
+  margin-right: 10px;
+  cursor: pointer;
 }
 
-/* Add Label button style */
 .add-label-button {
   background: #007bff;
   color: #fff;
@@ -310,34 +320,27 @@ body {
     font-size: 18px;
   }
 }
-.label-list {
-  list-style: none;
-  padding: 0;
-  margin-top: 15px; /* Add margin to create space between the button and labels */
-}
-.label-list li {
-  display: flex; /* Use flexbox to center align items */
-  justify-content: space-between;
-  align-items: center;
+
+/* Styling for the Copy, Delete, and Check buttons */
+.todo .icon-buttons button {
+  background: #007bff; /* Blue background color */
+  color: #fff; /* White text color */
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
   cursor: pointer;
-  margin: 5px;
-  padding: 7px;
-  border-radius: 5px;
-  box-shadow: 0 4px 6px rgba(209, 6, 6, 0.774);
-  transition: transform 0.2s;
-  flex: 1;
-}
+  transition: background 0.3s, transform 0.2s; /* Add transition for a smooth effect */
 
-.label-category {
-  font-size: 14px;
-  text-align: center; /* Center align the category text */
-}
-.icon-buttons {
+  /* Add a subtle shadow */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  /* Center the icon inside the button */
   display: flex;
-  gap: 10px; /* Add horizontal space between the icon buttons */
+  justify-content: center;
+  align-items: center;
 }
 
-.icon-button {
-  font-size: 24px;
-  margin-right: 10px; /* Add space to the right of each icon */
+.todo .icon-buttons button:hover {
+  background: #0056b3; /* Darker blue background on hover */
+  transform: scale(1.1); /* Slight scale effect on hover for a fancy appearance */
 }
