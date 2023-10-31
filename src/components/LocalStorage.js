@@ -1,4 +1,4 @@
-// LocalStorage.js
+// This code stores data to make sure that it is not lost when the page is refreshed
 
 export const LocalStorage = {
     // Get data from local storage
