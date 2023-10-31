@@ -1,148 +1,362 @@
-
+/* General styles */
 body {
   font-family: Arial, sans-serif;
+  background-color: #660eb9;
   margin: 0;
   padding: 0;
-  background-color: #FFD700;
 }
 
-.container {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.left {
-  width: 30%;
-  background-color: #f0f0f0;
-  padding: 10px;
-  overflow-y: scroll;
-}
-
-.section-title {
-  cursor: pointer;
-}
-
-.todo-list {
-  list-style: none;
-  padding: 0;
-}
-
-.todo {
-  cursor: pointer;
-  padding: 8px;
-  border: 1px solid #eee;
-  margin: 4px;
-}
-
-.selected-label {
-  background-color: #007bff;
-  color: #fff;
-}
-
-.done-label {
-  cursor: pointer;
-  text-decoration: underline;
-}
-
-.right {
-  width: 70%;
-  background-color: #f6f6f6;
-  padding: 10px;
-  overflow-y: scroll;
-}
-
-.center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.icon-buttons {
-  display: flex;
-}
-
-.icon {
-  cursor: pointer;
-  margin-right: 8px;
-}
-
-.done {
-  text-decoration: line-through;
-  color: #999;
-}
-
-.category-label {
-  padding: 4px 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin: 4px;
-}
-.label-input {
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin: 10px 0;
-}
 .todo-app {
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-  height: 100vh;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Prevent overflow on smaller screens */
 }
 
-.left-section, .right-section {
-  flex: 1;
+.left-section,
+.center-section,
+.right-section {
   padding: 20px;
-  border: 1px solid #ccc;
-  overflow-y: auto;
-  max-height: 100%;
+  border-right: 1px solid #ccc;
+  flex: 1;
 }
 
 .left-section {
-  flex: 0.3;
-  min-width: 0; 
+  flex: 0.3; /* Adjust the width for the left section */
 }
 
-.left-section ul, .right-section ul {
+.vertical-line {
+  border-right: 1px solid #ccc;
+  height: 100%;
+}
+
+.section-title {
+  color: #333;
+  cursor: pointer;
+}
+
+/* Styling for the Todo and Completed sections */
+.todo-list {
+  list-style: none;
+  padding: 0;
+  overflow-y: auto;
+}
+
+.todo {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.todo:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.todo.done {
+  background-color: #f0f9e8;
+  border: 1px solid #a0d468;
+}
+
+.details-label {
+  cursor: pointer;
+  color: #007bff;
+  font-weight: bold;
+}
+
+.todo .details-label:hover {
+  text-decoration: underline;
+}
+
+.todo p {
+  margin: 0;
+}
+
+/* Styling for Labels and Label input */
+.label-input {
+  margin: 20px 0;
+}
+
+.label-form {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+}
+
+.label-form:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.label-input input,
+.label-input textarea,
+.label-input select {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  transition: border-color 0.3s;
+}
+
+.label-input input:focus,
+.label-input textarea:focus,
+.label-input select:focus {
+  border-color: #007bff;
+}
+
+.label-input button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.label-input button:hover {
+  background: #0056b3;
+}
+
+/* Labels styling with 3D effect and different colors */
+.label-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+}
+
+.label-list li {
+  cursor: pointer;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  flex: 1;
+}
+
+.label-list li:hover {
+  transform: translateY(-4px);
+}
+
+.label-title {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.label-category {
+  font-size: 14px;
+}
+
+/* Different colors for each label */
+.label-list li:nth-child(odd) {
+  background-color: #ffc107;
+  border: 2px solid #ff9800;
+}
+
+.label-list li:nth-child(even) {
+  background-color: #2196F3;
+  border: 2px solid #1976d2;
+}
+
+/* Added Labels and Preview section styles */
+.added-labels {
+  margin: 20px 0;
+}
+
+.added-labels h3 {
+  color: #007bff;
+}
+
+.added-labels ul {
   list-style: none;
   padding: 0;
 }
 
-.left-section li, .right-section li {
+.added-labels li {
   cursor: pointer;
-  padding: 8px;
-  border: 1px solid #eee;
-  margin: 4px;
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: box-shadow 0.2s;
 }
 
-.selected-label {
-  background-color: #007bff;
-  color: #fff;
+.added-labels li:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.right-section h2 {
-  margin: 0;
+.label-details {
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
+  margin: 20px 0;
 }
 
-.right-section h3 {
+.label-details:hover {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.label-details h2 {
   color: #007bff;
+  font-size: 20px;
 }
 
-.right-section p {
-  margin: 0;
+/* Additional styles for the SearchBar section */
+.search-bar {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
 }
 
-.done-label {
+.search-bar input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.search-bar button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  text-decoration: underline;
+  transition: background 0.3s;
+  font-size: 16px;
+  margin-left: 10px;
 }
 
+.search-bar button:hover {
+  background: #0056b3;
+}
 
-@media (max-width: 767px) {
-  .left-section {
-    flex: 0.3; 
+.icon-button {
+  font-size: 24px;
+}
+
+/* Add Label button style */
+.add-label-button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.add-label-button:hover {
+  background: #0056b3;
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .todo-app {
+    flex-direction: column;
+  }
+  .left-section,
+  .center-section,
+  .right-section,
+  .vertical-line {
+    border: none;
+    padding: 10px;
+  }
+  .label-list li {
+    margin: 5px;
+    padding: 5px;
+  }
+  .added-labels li {
+    margin: 5px 0;
+    padding: 5px;
+  }
+  .label-details {
+    padding: 10px;
+  }
+  .search-bar input {
+    padding: 5px;
+  }
+  .search-bar button {
+    padding: 5px 10px;
+  }
+  .icon-button {
+    font-size: 18px;
   }
 }
+.label-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px; /* Add margin to create space between the button and labels */
+}
+.label-list li {
+  display: flex; /* Use flexbox to center align items */
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  margin: 5px;
+  padding: 7px;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(209, 6, 6, 0.774);
+  transition: transform 0.2s;
+  flex: 1;
+}
 
+.label-category {
+  font-size: 14px;
+  text-align: center; /* Center align the category text */
+}
+.icon-buttons {
+  display: flex;
+  gap: 10px; /* Add horizontal space between the icon buttons */
+}
+
+.icon-button {
+  font-size: 30px;
+  margin-right: 10px; /* Add space to the right of each icon */
+}
+/* Styles for the icon buttons */
+.icon-button {
+  background-color:transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 25px; /* Adjust the font size as needed */
+  color: #0bb44c; /* Adjust the icon color */
+  margin-right: 10px;
+}
+
+.icon-button:hover {
+  color: #0bb44c; /* Change the color on hover */
+}
+
+/* Style for the icons themselves */
+.fa-icon {
+  font-size: 22px; /* Adjust the font size as needed */
+  margin-right: 5px; /* Add some spacing to the right of the icon */
+}
