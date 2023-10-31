@@ -37,8 +37,6 @@ const Todo: React.FC = () => {
   const [labelCategory, setLabelCategory] = useState<string>('');
   const [customCategory, setCustomCategory] = useState<string>('');
   const [addedLabels, setAddedLabels] = useState<AddedLabel[]>([]);
-  const [showCustomCategoryInput, setShowCustomCategoryInput] = useState<boolean>(false);
-  const [isMessageVisible, setIsMessageVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const storedTodos = LocalStorage.get('todos', []); // Retrieve todos from local storage
@@ -66,11 +64,6 @@ const Todo: React.FC = () => {
       setLabelDescription('');
       setLabelCategory('');
       setShowLabelInput(false);
-      setIsMessageVisible(false);
-    } else if (showCustomCategoryInput) {
-      setIsMessageVisible(true);
-    } else {
-      setIsMessageVisible(true);
     }
   };
 
@@ -141,14 +134,7 @@ const Todo: React.FC = () => {
             <select
               placeholder="Label Category"
               value={labelCategory}
-              onChange={(e) => {
-                setLabelCategory(e.target.value);
-                if (e.target.value === 'custom') {
-                  setShowCustomCategoryInput(true);
-                } else {
-                  setShowCustomCategoryInput(false);
-                }
-              }}
+              onChange={(e) => setLabelCategory(e.target.value)}
             >
               <option value="">Select Category</option>
               {['school', 'personal', 'work out'].map((category) => (
@@ -158,7 +144,7 @@ const Todo: React.FC = () => {
               ))}
               <option value="custom">Custom</option>
             </select>
-            {showCustomCategoryInput && (
+            {labelCategory === 'custom' && (
               <input
                 placeholder="Custom Category"
                 value={customCategory}
@@ -205,11 +191,6 @@ const Todo: React.FC = () => {
           </div>
         )}
       </div>
-      {isMessageVisible && (
-        <div className="popup-message">
-          <p>Choose category or create a custom category</p>
-        </div>
-      )}
     </div>
   );
 };
