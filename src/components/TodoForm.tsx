@@ -19,7 +19,11 @@ const TodoForm: React.FC<TodoFormProps> = ({ onTodoAdd }) => {
   const [customCategory, setCustomCategory] = useState('');
 
   const handleAddTodo = () => {
-    let category = todoCategory || customCategory; // Use the selected category or custom category input
+    let category = todoCategory;
+
+    if (todoCategory === 'Custom' && customCategory.trim() !== '') {
+      category = customCategory.trim();
+    }
 
     const newTodo: TodoItem = {
       title: todoTitle,
@@ -56,9 +60,9 @@ const TodoForm: React.FC<TodoFormProps> = ({ onTodoAdd }) => {
         <option value="">Select Category</option>
         <option value="Work">Work</option>
         <option value="Personal">Personal</option>
-        <option value="">Custom</option> {/* Change the value to an empty string */}
+        <option value="Custom">Custom</option>
       </select>
-      {todoCategory === '' && (
+      {todoCategory === 'Custom' && (
         <input
           type="text"
           placeholder="Custom Category"
