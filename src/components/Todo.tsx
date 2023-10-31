@@ -36,6 +36,7 @@ const Todo: React.FC = () => {
   const [labelCategory, setLabelCategory] = useState<string>('');
   const [customCategory, setCustomCategory] = useState<string>('');
   const [addedLabels, setAddedLabels] = useState<AddedLabel[]>([]);
+  const [isLabelPreviewed, setIsLabelPreviewed] = useState<boolean>(false); // New state variable
 
   useEffect(() => {
     const storedTodos = LocalStorage.get('todos', []); // Retrieve todos from local storage
@@ -103,7 +104,13 @@ const Todo: React.FC = () => {
   };
 
   const selectLabel = (index: number) => {
-    setPreviewIndex(index);
+    if (index === previewIndex) {
+      setPreviewIndex(null);
+      setIsLabelPreviewed(false);
+    } else {
+      setPreviewIndex(index);
+      setIsLabelPreviewed(true);
+    }
   };
 
   const filteredLabels = addedLabels.filter((label) =>
@@ -162,7 +169,7 @@ const Todo: React.FC = () => {
         )}
         <ul className="label-list">
           {filteredLabels.map((label, index) => (
-            <li key={index} onClick={() => selectLabel(index)}>
+            <li key={index} onClick={() => selectLabel(index)} className={isLabelPreviewed && index === previewIndex ? 'selected-label' : ''}>
               <span className="label-title">{label.title}</span>
               <span className="label-category">{label.category}</span>
             </li>
@@ -179,19 +186,19 @@ const Todo: React.FC = () => {
                 onClick={() => copyToClipboard(addedLabels[previewIndex].fullInfo.description)}
                 className="icon-button"
               >
-                <FontAwesomeIcon icon={faClipboard} />
+                <FontAwesomeIcon icon={faClipboard} className="fa-icon" />
               </button>
               <button
                 onClick={() => markAsDone(previewIndex)}
                 className="icon-button"
               >
-                <FontAwesomeIcon icon={faCheck} />
+                <FontAwesomeIcon icon={faCheck} className="fa-icon" />
               </button>
               <button
                 onClick={() => deleteLabel(previewIndex)}
                 className="icon-button"
               >
-                <FontAwesomeIcon icon={faTrash} />
+                <FontAwesomeIcon icon={faTrash} className="fa-icon" />
               </button>
             </div>
           </div>
