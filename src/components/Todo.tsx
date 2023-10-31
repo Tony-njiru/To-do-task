@@ -4,7 +4,7 @@ import './Todo.css';
 import SearchBar from './searchbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy, faCheck, faTrash, faClipboard } from '@fortawesome/free-solid-svg-icons';
-import { LocalStorage } from './LocalStorage'; // Import the LocalStorage module
+import { LocalStorage } from './LocalStorage';
 
 interface TodoItem {
   title: string;
@@ -82,7 +82,7 @@ const Todo: React.FC = () => {
   const deleteLabel = (index: number) => {
     const updatedLabels = addedLabels.filter((_, i) => i !== index);
     setAddedLabels(updatedLabels);
-    setPreviewIndex(null); // Reset the preview index
+    setPreviewIndex(null); 
   };
 
   const editTodo = (index: number, newTitle: string, newDescription: string) => {
