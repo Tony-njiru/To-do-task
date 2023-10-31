@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './App.css'; // Import your CSS file if you have one
+import './App.css'; 
 
 const App = () => {
   const [todos, setTodos] = useState([]);
@@ -8,7 +8,7 @@ const App = () => {
   const addTodo = () => {
     if (newTodo) {
       setTodos([...todos, { title: newTodo, completed: false }]);
-      setNewTodo(''); // Reset the input field
+      setNewTodo(''); // Resets the input field
     }
   };
 
