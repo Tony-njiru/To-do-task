@@ -19,12 +19,17 @@ const TodoForm: React.FC<TodoFormProps> = ({ onTodoAdd }) => {
   const [customCategory, setCustomCategory] = useState('');
 
   const handleAddTodo = () => {
+    let category = todoCategory || customCategory; // Use the selected category or custom category input
+    if (todoCategory === 'Custom' && customCategory.trim() !== '') {
+      category = customCategory.trim(); // Use the custom category input if it's not empty
+    }
+
     const newTodo: TodoItem = {
       title: todoTitle,
       description: todoDescription,
       isDone: false,
       isEditing: false,
-      category: todoCategory || customCategory,
+      category: category,
     };
     onTodoAdd(newTodo);
     // Reset form fields
@@ -68,4 +73,5 @@ const TodoForm: React.FC<TodoFormProps> = ({ onTodoAdd }) => {
     </div>
   );
 };
+
 export default TodoForm;
