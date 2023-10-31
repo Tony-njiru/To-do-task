@@ -1,4 +1,3 @@
-/* General styles */
 body {
   font-family: Arial, sans-serif;
   background-color: #371a7c;
@@ -25,7 +24,7 @@ body {
 }
 
 .left-section {
-  flex: 0.3; /* Adjust the width for the left section */
+  flex: 0.3; 
 }
 
 .vertical-line {
@@ -166,15 +165,14 @@ body {
 /* Different colors for each label */
 .label-list li:nth-child(odd) {
   background-color: #ffc107;
-  border: 2px solid #ff9800;
+  border: 2px solid #006eff;
 }
 
 .label-list li:nth-child(even) {
   background-color: #2196F3;
-  border: 2px solid #1976d2;
+  border: 2px solid #11dbba;
 }
 
-/* Added Labels and Preview section styles */
 .added-labels {
   margin: 20px 0;
 }
@@ -224,7 +222,6 @@ body {
   font-size: 20px;
 }
 
-/* Additional styles for the SearchBar section */
 .search-bar {
   margin: 20px 0;
   display: flex;
@@ -260,7 +257,6 @@ body {
   font-size: 24px;
 }
 
-/* Add Label button style */
 .add-label-button {
   background: #007bff;
   color: #fff;
@@ -313,7 +309,7 @@ body {
 .label-list {
   list-style: none;
   padding: 0;
-  margin-top: 15px; /* Add margin to create space between the button and labels */
+  margin-top: 15px; 
 }
 .label-list li {
   display: flex; /* Use flexbox to center align items */
@@ -330,14 +326,14 @@ body {
 
 .label-category {
   font-size: 14px;
-  text-align: center; /* Center align the category text */
+  text-align: center; 
 }
 .icon-buttons {
   display: flex;
-  gap: 10px; /* Add horizontal space between the icon buttons */
+  gap: 10px; 
 }
 
 .icon-button {
   font-size: 24px;
-  margin-right: 10px; /* Add space to the right of each icon */
+  margin-right: 10px; 
 }
