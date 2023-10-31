@@ -38,7 +38,7 @@ const Todo: React.FC = () => {
   const [customCategory, setCustomCategory] = useState<string>('');
   const [addedLabels, setAddedLabels] = useState<AddedLabel[]>([]);
   const [showCustomCategoryInput, setShowCustomCategoryInput] = useState<boolean>(false);
-  const [message, setMessage] = useState<string>('');
+  const [isMessageVisible, setIsMessageVisible] = useState<boolean>(false);
 
   useEffect(() => {
     const storedTodos = LocalStorage.get('todos', []); // Retrieve todos from local storage
@@ -66,11 +66,11 @@ const Todo: React.FC = () => {
       setLabelDescription('');
       setLabelCategory('');
       setShowLabelInput(false);
-      setMessage(''); // Reset the message
+      setIsMessageVisible(false);
     } else if (showCustomCategoryInput) {
-      setMessage('Choose category or create a custom one');
+      setIsMessageVisible(true);
     } else {
-      setMessage('Choose category');
+      setIsMessageVisible(true);
     }
   };
 
@@ -166,7 +166,6 @@ const Todo: React.FC = () => {
               />
             )}
             <button onClick={addLabel}>Add Task</button>
-            {message && <p className="error-message">{message}</p>}
           </div>
         )}
         <ul className="label-list">
@@ -206,6 +205,12 @@ const Todo: React.FC = () => {
           </div>
         )}
       </div>
+      {isMessageVisible && (
+        <div className="popup-message">
+          <p>Choose category or create a custom category</p>
+          <button onClick={() => setIsMessageVisible(false)}>OK</button>
+        </div>
+      )}
     </div>
   );
 };
