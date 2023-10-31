@@ -1,7 +1,4 @@
-// searchbar.tsx
-
 import React, { useState, ChangeEvent } from 'react';
-
 interface SearchBarProps {
   searchTerm: string;
   handleSearch: (term: string) => void; // Define the handleSearch prop
