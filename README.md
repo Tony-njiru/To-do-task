@@ -2,7 +2,7 @@
 
 This is a web-based Todo application that helps you manage your tasks efficiently. With a user-friendly interface and key features, you can stay organized and on top of your to-do list.
 
-![Todo App Screenshot](/screenshots/todo-app.png)
+![Todo App Screenshot](/public/images/todo.PNG)
 
 ## Features
 
