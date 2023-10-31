@@ -208,7 +208,6 @@ const Todo: React.FC = () => {
       {isMessageVisible && (
         <div className="popup-message">
           <p>Choose category or create a custom category</p>
-          <button onClick={() => setIsMessageVisible(false)}>OK</button>
         </div>
       )}
     </div>
