@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Todo.css';
-import './SearchBar.css';
+import './SearchBar.css'; // Make sure to include the appropriate CSS file for SearchBar
 import SearchBar from './searchbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -121,8 +121,10 @@ const Todo: React.FC = () => {
     setSearchTerm(term);
   };
 
-  const pinnedLabels = addedLabels.filter((label) => label.isPinned);
-  const unpinnedLabels = addedLabels.filter((label) => !label.isPinned);
+  // Filter labels based on the search term
+  const filteredLabels = addedLabels.filter((label) =>
+    label.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
   return (
     <div className="todo-app">
@@ -175,26 +177,7 @@ const Todo: React.FC = () => {
           </div>
         )}
         <ul className="label-list">
-          {unpinnedLabels.map((label, index) => (
-            <li
-              key={index}
-              onClick={() => selectLabel(addedLabels.indexOf(label))}
-              className={isLabelPreviewed && addedLabels.indexOf(label) === previewIndex ? 'selected-label' : ''}
-            >
-              <span className="label-title">{label.title}</span>
-              <span className="label-category">{label.category}</span>
-              <span
-                className={`pin-icon ${label.isPinned ? 'pinned' : ''}`}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  togglePin(addedLabels.indexOf(label));
-                }}
-              >
-                <FontAwesomeIcon icon={faThumbtack} className="fa-icon" />
-              </span>
-            </li>
-          ))}
-          {pinnedLabels.map((label, index) => (
+          {filteredLabels.map((label, index) => (
             <li
               key={index}
               onClick={() => selectLabel(addedLabels.indexOf(label))}
