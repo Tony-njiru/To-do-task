@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './Todo.css';
-import './SearchBar.css'; // Make sure to include the appropriate CSS file for SearchBar
+import './SearchBar.css'; 
 import SearchBar from './searchbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
