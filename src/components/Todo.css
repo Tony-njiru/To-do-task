@@ -359,3 +359,16 @@ body {
   font-size: 22px; 
   margin-right: 5px; 
 }
+/* Pin Style */
+
+.pin-icon {
+  cursor: pointer;
+  font-size: 18px;
+  color: #007bff;
+  transition: color 0.2s; /* Add a transition for smooth color change */
+}
+
+.pin-icon.pinned {
+  color: #dc3545;
+}
+
