@@ -1,7 +1,6 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import Todo from './Todo';
-import { LocalStorage } from './LocalStorage';
 
 // Mock the LocalStorage module to avoid actual storage operations
 jest.mock('./LocalStorage', () => ({
