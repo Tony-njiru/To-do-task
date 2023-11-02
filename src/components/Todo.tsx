@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Todo.css';
-import './SearchBar.css'; 
+import './SearchBar.css';
 import SearchBar from './searchbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -29,6 +29,8 @@ interface AddedLabel {
   };
   isPinned: boolean;
 }
+
+const LOCAL_STORAGE_KEY = 'todoApp';
 
 const Todo: React.FC = () => {
   const [todos, setTodos] = useState<TodoItem[]>([]);
@@ -75,7 +77,14 @@ const Todo: React.FC = () => {
         },
         isPinned: false,
       };
+
+      // Update the addedLabels state
       setAddedLabels([newLabel, ...addedLabels]);
+
+      // Save addedLabels to local storage
+      const updatedLabels = [newLabel, ...addedLabels];
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedLabels));
+
       setLabelTitle('');
       setLabelDescription('');
       setLabelCategory('');
@@ -92,20 +101,34 @@ const Todo: React.FC = () => {
 
   const markAsDone = (index: number) => {
     const updatedLabels = [...addedLabels];
-    updatedLabels[index].category = "Completed";
+    updatedLabels[index].category = "Congratulations! you finished the task";
     setAddedLabels(updatedLabels);
+
+    // Save updatedLabels to local storage
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedLabels));
   };
 
   const deleteLabel = (index: number) => {
     const updatedLabels = addedLabels.filter((_, i) => i !== index);
+
+    // Update the addedLabels state
     setAddedLabels(updatedLabels);
+
+    // Save updatedLabels to local storage
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedLabels));
+
     setPreviewIndex(null);
   };
 
   const togglePin = (index: number) => {
     const updatedLabels = [...addedLabels];
     updatedLabels[index].isPinned = !updatedLabels[index].isPinned;
+
+    // Update the addedLabels state
     setAddedLabels(updatedLabels);
+
+    // Save updatedLabels to local storage
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(updatedLabels));
 
     if (updatedLabels[index].isPinned) {
       showNotification(`Task "${updatedLabels[index].title}" is pinned!`);
@@ -129,6 +152,14 @@ const Todo: React.FC = () => {
   // Split the labels into pinned and unpinned tasks
   const pinnedLabels = filteredLabels.filter((label) => label.isPinned);
   const unpinnedLabels = filteredLabels.filter((label) => !label.isPinned);
+
+  useEffect(() => {
+    // Load labels from local storage when the component mounts
+    const storedLabels = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (storedLabels) {
+      setAddedLabels(JSON.parse(storedLabels));
+    }
+  }, []);
 
   return (
     <div className="todo-app">
@@ -181,8 +212,7 @@ const Todo: React.FC = () => {
           </div>
         )}
         <ul className="label-list">
-          {/* Render unpinned tasks first */
-          unpinnedLabels.map((label, index) => (
+          {unpinnedLabels.map((label, index) => (
             <li
               key={index}
               onClick={() => selectLabel(addedLabels.indexOf(label))}
@@ -201,9 +231,7 @@ const Todo: React.FC = () => {
               </span>
             </li>
           ))}
-
-          {/* Then, render pinned tasks */
-          pinnedLabels.map((label, index) => (
+          {pinnedLabels.map((label, index) => (
             <li
               key={index}
               onClick={() => selectLabel(addedLabels.indexOf(label))}
@@ -226,7 +254,7 @@ const Todo: React.FC = () => {
       </div>
       <div className="right-section">
         <h2 className="section-title">
-          <u>Details</u>
+          <u>Tasks Information</u>
         </h2>
         {previewIndex !== null && addedLabels[previewIndex] && (
           <div>
