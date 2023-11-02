@@ -1,3 +1,4 @@
+//Used this for the first  apperance of selecting category
 import React, { useState } from 'react';
 import './Category.css';
 
