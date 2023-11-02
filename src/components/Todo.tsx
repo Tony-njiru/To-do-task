@@ -126,6 +126,10 @@ const Todo: React.FC = () => {
     label.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // Split the labels into pinned and unpinned tasks
+  const pinnedLabels = filteredLabels.filter((label) => label.isPinned);
+  const unpinnedLabels = filteredLabels.filter((label) => !label.isPinned);
+
   return (
     <div className="todo-app">
       <div className="left-section">
@@ -177,7 +181,29 @@ const Todo: React.FC = () => {
           </div>
         )}
         <ul className="label-list">
-          {filteredLabels.map((label, index) => (
+          {/* Render unpinned tasks first */
+          unpinnedLabels.map((label, index) => (
+            <li
+              key={index}
+              onClick={() => selectLabel(addedLabels.indexOf(label))}
+              className={isLabelPreviewed && addedLabels.indexOf(label) === previewIndex ? 'selected-label' : ''}
+            >
+              <span className="label-title">{label.title}</span>
+              <span className="label-category">{label.category}</span>
+              <span
+                className={`pin-icon ${label.isPinned ? 'pinned' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  togglePin(addedLabels.indexOf(label));
+                }}
+              >
+                <FontAwesomeIcon icon={faThumbtack} className="fa-icon" />
+              </span>
+            </li>
+          ))}
+
+          {/* Then, render pinned tasks */
+          pinnedLabels.map((label, index) => (
             <li
               key={index}
               onClick={() => selectLabel(addedLabels.indexOf(label))}
