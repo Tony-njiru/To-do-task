@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import './Todo.css';
-import './SearchBar.css';
 import SearchBar from './searchbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy, faCheck, faTrash, faClipboard } from '@fortawesome/free-solid-svg-icons';
@@ -39,15 +38,7 @@ const Todo: React.FC = () => {
   const [addedLabels, setAddedLabels] = useState<AddedLabel[]>([]);
   const [isLabelPreviewed, setIsLabelPreviewed] = useState<boolean>(false); // New state variable
 
-  useEffect(() => {
-    const storedTodos = LocalStorage.get('todos', []); // Retrieve todos from local storage
-    setTodos(storedTodos);
-  }, []);
-
-  useEffect(() => {
-    LocalStorage.set('todos', todos); // Store todos in local storage
-  }, [todos]);
-
+  
   const addLabel = () => {
     if (labelTitle) {
       let category = labelCategory;
@@ -83,7 +74,7 @@ const Todo: React.FC = () => {
 
   const markAsDone = (index: number) => {
     const updatedLabels = [...addedLabels];
-    updatedLabels[index].category = "Done";
+    updatedLabels[index].category = "Congrants! you finished task";
     setAddedLabels(updatedLabels);
   };
 
@@ -122,10 +113,11 @@ const Todo: React.FC = () => {
     <div className="todo-app">
       <div className="left-section">
         <h2 className="section-title">
-          To Do
+         Tasks To DO
         </h2>
       </div>
       <div className="center-section">
+
         <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
         <button
           onClick={() => setShowLabelInput(!showLabelInput)}
@@ -151,7 +143,7 @@ const Todo: React.FC = () => {
               onChange={(e) => setLabelCategory(e.target.value)}
             >
               <option value="">Select Category</option>
-              {['school', 'personal', 'work out'].map((category) => (
+              {['School', 'Personal', 'Work out'].map((category) => (
                 <option key={category} value={category}>
                   {category}
                 </option>
@@ -178,6 +170,9 @@ const Todo: React.FC = () => {
         </ul>
       </div>
       <div className="right-section">
+      <h2 className="section-title">
+        <u>Tasks Information</u>
+        </h2>
         {previewIndex !== null && addedLabels[previewIndex] && (
           <div>
             <h3>{addedLabels[previewIndex].fullInfo.title}</h3>
