@@ -1,10 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './Todo.css';
-import './SearchBar.css';
+import './SearchBar.css'; // Make sure to include the appropriate CSS file for SearchBar
 import SearchBar from './searchbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCopy, faCheck, faTrash, faClipboard } from '@fortawesome/free-solid-svg-icons';
-import { LocalStorage } from './LocalStorage';
+import {
+  faCopy,
+  faCheck,
+  faTrash,
+  faClipboard,
+  faThumbtack,
+} from '@fortawesome/free-solid-svg-icons';
 
 interface TodoItem {
   title: string;
@@ -22,6 +27,7 @@ interface AddedLabel {
     description: string;
     category: string;
   };
+  isPinned: boolean;
 }
 
 const Todo: React.FC = () => {
@@ -37,9 +43,19 @@ const Todo: React.FC = () => {
   const [labelCategory, setLabelCategory] = useState<string>('');
   const [customCategory, setCustomCategory] = useState<string>('');
   const [addedLabels, setAddedLabels] = useState<AddedLabel[]>([]);
-  const [isLabelPreviewed, setIsLabelPreviewed] = useState<boolean>(false); // New state variable
+  const [isLabelPreviewed, setIsLabelPreviewed] = useState<boolean>(false);
+  const [notification, setNotification] = useState<string | null>(null);
 
-  
+  const selectLabel = (index: number) => {
+    if (index === previewIndex) {
+      setPreviewIndex(null);
+      setIsLabelPreviewed(false);
+    } else {
+      setPreviewIndex(index);
+      setIsLabelPreviewed(true);
+    }
+  };
+
   const addLabel = () => {
     if (labelTitle) {
       let category = labelCategory;
@@ -51,14 +67,15 @@ const Todo: React.FC = () => {
       const newLabel: AddedLabel = {
         title: labelTitle,
         description: labelDescription,
-        category: category, // Set the category based on user input
+        category: category,
         fullInfo: {
           title: labelTitle,
           description: labelDescription,
-          category: category, // Update the category here as well
+          category: category,
         },
+        isPinned: false,
       };
-      setAddedLabels([...addedLabels, newLabel]);
+      setAddedLabels([newLabel, ...addedLabels]);
       setLabelTitle('');
       setLabelDescription('');
       setLabelCategory('');
@@ -75,7 +92,7 @@ const Todo: React.FC = () => {
 
   const markAsDone = (index: number) => {
     const updatedLabels = [...addedLabels];
-    updatedLabels[index].category = "Congrants! you finished task";
+    updatedLabels[index].category = "Congratulations! you finished the task";
     setAddedLabels(updatedLabels);
   };
 
@@ -85,40 +102,42 @@ const Todo: React.FC = () => {
     setPreviewIndex(null);
   };
 
-  const editTodo = (index: number, newTitle: string, newDescription: string) => {
-    const updatedTodos = [...todos];
-    updatedTodos[index].title = newTitle;
-    updatedTodos[index].description = newDescription;
-    setTodos(updatedTodos);
+  const togglePin = (index: number) => {
+    const updatedLabels = [...addedLabels];
+    updatedLabels[index].isPinned = !updatedLabels[index].isPinned;
+    setAddedLabels(updatedLabels);
+
+    if (updatedLabels[index].isPinned) {
+      showNotification(`Task "${updatedLabels[index].title}" is pinned!`);
+    }
+  };
+
+  const showNotification = (message: string) => {
+    setNotification(message);
+    setTimeout(() => setNotification(null), 2000);
   };
 
   const handleSearch = (term: string) => {
     setSearchTerm(term);
   };
 
-  const selectLabel = (index: number) => {
-    if (index === previewIndex) {
-      setPreviewIndex(null);
-      setIsLabelPreviewed(false);
-    } else {
-      setPreviewIndex(index);
-      setIsLabelPreviewed(true);
-    }
-  };
-
+  // Filter labels based on the search term
   const filteredLabels = addedLabels.filter((label) =>
     label.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  // Split the labels into pinned and unpinned tasks
+  const pinnedLabels = filteredLabels.filter((label) => label.isPinned);
+  const unpinnedLabels = filteredLabels.filter((label) => !label.isPinned);
 
   return (
     <div className="todo-app">
       <div className="left-section">
         <h2 className="section-title">
-         Tasks To DO
+          Tasks To DO
         </h2>
       </div>
       <div className="center-section">
-
         <SearchBar searchTerm={searchTerm} handleSearch={handleSearch} />
         <button
           onClick={() => setShowLabelInput(!showLabelInput)}
@@ -162,17 +181,52 @@ const Todo: React.FC = () => {
           </div>
         )}
         <ul className="label-list">
-          {filteredLabels.map((label, index) => (
-            <li key={index} onClick={() => selectLabel(index)} className={isLabelPreviewed && index === previewIndex ? 'selected-label' : ''}>
+          {/* Render unpinned tasks first */
+          unpinnedLabels.map((label, index) => (
+            <li
+              key={index}
+              onClick={() => selectLabel(addedLabels.indexOf(label))}
+              className={isLabelPreviewed && addedLabels.indexOf(label) === previewIndex ? 'selected-label' : ''}
+            >
               <span className="label-title">{label.title}</span>
               <span className="label-category">{label.category}</span>
+              <span
+                className={`pin-icon ${label.isPinned ? 'pinned' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  togglePin(addedLabels.indexOf(label));
+                }}
+              >
+                <FontAwesomeIcon icon={faThumbtack} className="fa-icon" />
+              </span>
+            </li>
+          ))}
+
+          {/* Then, render pinned tasks */
+          pinnedLabels.map((label, index) => (
+            <li
+              key={index}
+              onClick={() => selectLabel(addedLabels.indexOf(label))}
+              className={isLabelPreviewed && addedLabels.indexOf(label) === previewIndex ? 'selected-label' : ''}
+            >
+              <span className="label-title">{label.title}</span>
+              <span className="label-category">{label.category}</span>
+              <span
+                className={`pin-icon ${label.isPinned ? 'pinned' : ''}`}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  togglePin(addedLabels.indexOf(label));
+                }}
+              >
+                <FontAwesomeIcon icon={faThumbtack} className="fa-icon" />
+              </span>
             </li>
           ))}
         </ul>
       </div>
       <div className="right-section">
-      <h2 className="section-title">
-        <u>Task Details</u>
+        <h2 className="section-title">
+          <u>Tasks Information</u>
         </h2>
         {previewIndex !== null && addedLabels[previewIndex] && (
           <div>
@@ -200,6 +254,9 @@ const Todo: React.FC = () => {
             </div>
           </div>
         )}
+      </div>
+      <div className="notification">
+        {notification && <div className="notification-message">{notification}</div>}
       </div>
     </div>
   );
