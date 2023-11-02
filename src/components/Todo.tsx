@@ -92,7 +92,7 @@ const Todo: React.FC = () => {
 
   const markAsDone = (index: number) => {
     const updatedLabels = [...addedLabels];
-    updatedLabels[index].category = "Congratulations! you finished the task";
+    updatedLabels[index].category = "Completed";
     setAddedLabels(updatedLabels);
   };
 
@@ -226,7 +226,7 @@ const Todo: React.FC = () => {
       </div>
       <div className="right-section">
         <h2 className="section-title">
-          <u>Tasks Information</u>
+          <u>Details</u>
         </h2>
         {previewIndex !== null && addedLabels[previewIndex] && (
           <div>
