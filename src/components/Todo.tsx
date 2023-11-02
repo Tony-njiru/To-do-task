@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Todo.css';
+import './SearchBar.css';
 import SearchBar from './searchbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy, faCheck, faTrash, faClipboard } from '@fortawesome/free-solid-svg-icons';
