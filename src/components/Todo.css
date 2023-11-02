@@ -364,11 +364,11 @@ body {
 .pin-icon {
   cursor: pointer;
   font-size: 18px;
-  color: hsl(308, 100%, 50%);
+color: #000000;
   transition: color 0.2s; /* Add a transition for smooth color change */
 }
 
 .pin-icon.pinned {
-  color: #dc3545;
+color: #000000;
 }
 
