@@ -101,7 +101,7 @@ const Todo: React.FC = () => {
 
   const markAsDone = (index: number) => {
     const updatedLabels = [...addedLabels];
-    updatedLabels[index].category = "Congratulations! you finished the task";
+    updatedLabels[index].category = "Completed!";
     setAddedLabels(updatedLabels);
 
     // Save updatedLabels to local storage
