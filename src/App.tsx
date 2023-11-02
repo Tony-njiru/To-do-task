@@ -1,6 +1,6 @@
 import React from 'react';
 import Todo from './components/Todo';
-import { LocalStorage } from './components/LocalStorage';
+import { saveToLocalStorage, getFromLocalStorage } from './components/LocalStorage'; // Imports the functions
 
 function App() {
   return (
