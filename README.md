@@ -8,6 +8,8 @@ This is a web-based Todo application that helps you manage your tasks efficientl
 
 - **Add and Categorize Tasks**: Create tasks with titles, descriptions, and categories. Choose from pre-defined categories like "work," "personal," and "study," or create your own custom categories.
 
+- **Stores your Todo even after page refresh**: Stores todo in your browser even after you refresh your tab or closes it accidentally. All your data is saved.
+
 - **Search and Filter**: Easily find tasks with the search bar. Filter tasks by category or text, making it simple to locate specific items.
 
 - **minimizes to do**: minimizes your todos just incse you have lots of them; saving your screen and able to manage them at once.
