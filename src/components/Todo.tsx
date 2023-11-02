@@ -172,7 +172,7 @@ const Todo: React.FC = () => {
       </div>
       <div className="right-section">
       <h2 className="section-title">
-        <u>Tasks Information</u>
+        <u>Task Details</u>
         </h2>
         {previewIndex !== null && addedLabels[previewIndex] && (
           <div>
